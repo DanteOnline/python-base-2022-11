@@ -1,3 +1,6 @@
+"""
+items
+"""
 from flask import Blueprint
 
 items_app = Blueprint(
@@ -9,6 +12,10 @@ items_app = Blueprint(
 
 @items_app.get("/")
 def get_items_list():
+    """
+    get items list
+    :return:
+    """
     return {
         "data": [
             {
@@ -37,6 +44,11 @@ def get_items_list():
 @items_app.get("/<int:item_id>/")
 @items_app.get("/<string:item_id>/")
 def get_item_by_id_str(item_id: str):
+    """
+    get item by id str
+    :param item_id:
+    :return:
+    """
     return {
         "data": {
             # "id": item_id.upper(),

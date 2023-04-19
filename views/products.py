@@ -1,3 +1,6 @@
+"""
+products
+"""
 from dataclasses import dataclass
 
 from flask import Blueprint, render_template, request, redirect, url_for
@@ -13,21 +16,36 @@ products_app = Blueprint(
 
 @dataclass(frozen=True, slots=True)
 class Product:
-    id: int
+    """
+    Product
+    """
+    id: int # pylint: disable=C0103
     name: str
 
 
 @dataclass(frozen=False, slots=True)
 class ProductsStorage:
+    """
+    ProductsStorage
+    """
     products: dict[int, Product]
     last_index: int = 0
 
     @property
     def next_index(self):
+        """
+        next index
+        :return:
+        """
         self.last_index += 1
         return self.last_index
 
     def create(self, name: str) -> Product:
+        """
+        create
+        :param name:
+        :return:
+        """
         product = Product(id=self.next_index, name=name)
         self.products[product.id] = product
         return product
@@ -41,12 +59,21 @@ storage.create("Smartphone")
 
 @products_app.get("/", endpoint="list")
 def get_products():
+    """
+    get products
+    :return:
+    """
     products = list(storage.products.values())
     return render_template("products/list.html", products=products)
 
 
 @products_app.get("/<int:product_id>/", endpoint="details")
 def get_product_details(product_id: int):
+    """
+    get product details
+    :param product_id:
+    :return:
+    """
     # try:
     #     product = storage.products[product_id]
     # except KeyError:
@@ -60,6 +87,10 @@ def get_product_details(product_id: int):
 
 @products_app.route("/create/", methods=["GET", "POST"], endpoint="create")
 def create_product():
+    """
+    create product
+    :return:
+    """
     if request.method == "GET":
         return render_template("products/create.html")
 
