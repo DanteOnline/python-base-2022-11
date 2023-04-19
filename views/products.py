@@ -22,6 +22,8 @@ class Product:
     id: int # pylint: disable=C0103
     name: str
 
+    __slots__ = ('id', 'name')
+
 
 @dataclass(frozen=False)
 class ProductsStorage:
