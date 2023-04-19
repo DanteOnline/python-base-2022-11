@@ -14,7 +14,7 @@ products_app = Blueprint(
 )
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Product:
     """
     Product
@@ -23,7 +23,7 @@ class Product:
     name: str
 
 
-@dataclass(frozen=False, slots=True)
+@dataclass(frozen=False)
 class ProductsStorage:
     """
     ProductsStorage
