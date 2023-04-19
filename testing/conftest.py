@@ -1,13 +1,13 @@
 """
 conftest
 """
-from _pytest.fixtures import fixture
+import pytest
 from flask.testing import FlaskClient
 
 from main import app
 
 
-@fixture
+@pytest.fixture
 def client() -> FlaskClient:
     """
     FlaskClient
